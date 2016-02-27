@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    tools:context="com.codepath.apps.mptweettweet.activities.DetailActivity">
+
+    <ScrollView
+        android:id="@+id/svContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/ivProfileImage"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="10dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/profile_photo_placeholder"
+                app:riv_border_color="#333333"
+                app:riv_border_width="0dip"
+                app:riv_corner_radius="10dip"
+                app:riv_mutate_background="true" />
+
+            <TextView
+                android:id="@+id/tvUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/ivProfileImage"
+                android:layout_toRightOf="@+id/ivProfileImage"
+                android:text="Username"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvTimestamp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:text="10 mins ago" />
+
+            <TextView
+                android:id="@+id/tvHandle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvUsername"
+                android:layout_toRightOf="@+id/ivProfileImage"
+                android:text="Handle"
+                android:textColor="@color/text_dark" />
+
+            <TextView
+                android:id="@+id/tvBody"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ivProfileImage"
+                android:autoLink="all"
+                android:linksClickable="true"
+                android:padding="3dp"
+                android:text="Body"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <ImageView
+                android:id="@+id/ivMedia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvBody" />
+
+
+            <View
+                android:id="@+id/vDividerTop"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/ivMedia"
+                android:layout_marginBottom="3dp"
+                android:layout_marginLeft="@dimen/divider_margin"
+                android:layout_marginRight="@dimen/divider_margin"
+                android:layout_marginTop="3dp"
+                android:background="@color/divider" />
+
+
+            <TextView
+                android:id="@+id/tvInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/vDividerTop"
+                android:layout_marginBottom="17dp"
+                android:text="670 RETWEETS 2242 LIKES" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

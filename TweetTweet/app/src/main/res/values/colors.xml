@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#59a8ea</color>
+    <color name="colorPrimaryDark">#4084be</color>
+    <color name="colorAccent">#28c7f8</color>
+
+    <color name="titleOverlay">#88000000</color>
+    <color name="app_background">#1d3137</color>
+    <color name="app_fore_ground">#324349</color>
+
+    <color name="text_dark">#AAB8C2</color>
+    <color name="divider">#cacdcf</color>
+    <color name="redtext">#ff4d4d</color>
+
+</resources>
