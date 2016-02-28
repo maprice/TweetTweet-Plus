@@ -19,8 +19,21 @@ public class User extends Model {
     public Long uid;
     @Column(name = "profileImageUrl")
     public String profileImageUrl;
+
     @Column(name = "screenName")
     public String screenName;
+
+
+    @Column(name = "profile_background_image_url")
+    public String backgroundImageUrl;
+
+    @Column(name = "friends_count")
+    public int friendsCount;
+
+    @Column(name = "followers_count")
+    public int followersCount;
+
+
 
     public User(){
     }
@@ -32,7 +45,11 @@ public class User extends Model {
             this.name = json.getString("name");
             this.uid = json.getLong("id");
             this.profileImageUrl = json.getString("profile_image_url");
-            this.screenName = json.getString("screen_name");
+
+this.screenName = json.getString("screen_name");
+            this.backgroundImageUrl = json.getString("profile_background_image_url");
+            this.friendsCount = json.getInt("friends_count");
+            this.followersCount = json.getInt("followers_count");
 
         } catch (JSONException e) {
             e.printStackTrace();

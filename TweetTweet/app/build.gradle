@@ -45,4 +45,5 @@ dependencies {
     compile 'org.parceler:parceler-api:1.0.4'
     apt 'org.parceler:parceler:1.0.4'
     compile 'com.ocpsoft:ocpsoft-pretty-time:1.0.6'
+    compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
 }

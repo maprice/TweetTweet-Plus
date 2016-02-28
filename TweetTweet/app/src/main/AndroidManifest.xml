@@ -14,7 +14,6 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-
     <application
         android:name="com.codepath.apps.mptweettweet.RestApplication"
         android:allowBackup="true"
@@ -32,7 +31,6 @@
             android:name="com.codepath.apps.mptweettweet.activities.LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme" >
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -44,25 +42,25 @@
                     android:scheme="oauth" />
             </intent-filter>
         </activity>
-        <activity android:name="com.codepath.apps.mptweettweet.activities.TimelineActivity"
-            android:label="@string/title_activity_main">
-
+        <activity
+            android:name="com.codepath.apps.mptweettweet.activities.TimelineActivity"
+            android:label="@string/title_activity_main" >
         </activity>
         <activity
             android:name="com.codepath.apps.mptweettweet.activities.DetailActivity"
-            android:label="@string/title_activity_detail">
-
+            android:label="@string/title_activity_detail" >
         </activity>
-
-        <activity android:name="com.codepath.apps.mptweettweet.activities.SplashActivity"
-            android:theme="@style/SplashTheme">
+        <activity
+            android:name="com.codepath.apps.mptweettweet.activities.SplashActivity"
+            android:theme="@style/SplashTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name="com.codepath.apps.mptweettweet.activities.ProfileActivity" >
+        </activity>
     </application>
 
 </manifest>

@@ -29,6 +29,7 @@ public class TweetArrayAdapter extends RecyclerView.Adapter<TweetArrayAdapter.Tw
         void retweet(Tweet tweet);
         void reply(Tweet tweet);
         void favorite(Tweet tweet);
+        void openProfile(User user);
     }
 
     private ITweetInteractionListener mListener;
@@ -109,7 +110,7 @@ public class TweetArrayAdapter extends RecyclerView.Adapter<TweetArrayAdapter.Tw
         holder.tvBody.setText(tweet.body);
         holder.tvTimestamp.setText(Utils.getRelativeTime(tweet.createdAt));
 
-        User user = tweet.user;
+        final User user = tweet.user;
         if (user != null) {
             holder.tvUsername.setText(user.name);
             holder.tvHandle.setText("@" + user.screenName);
@@ -142,6 +143,13 @@ public class TweetArrayAdapter extends RecyclerView.Adapter<TweetArrayAdapter.Tw
                 holder.btnLike.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.heart_red, 0);
                 holder.btnLike.setText(String.valueOf(tweet.favoriteCount + 1));
                 mListener.favorite(tweet);
+            }
+        });
+
+        holder.ivProfileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.openProfile(user);
             }
         });
 
