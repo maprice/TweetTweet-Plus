@@ -49,13 +49,16 @@ public class LoginActivity extends OAuthLoginActionBarActivity<TwitterClient> {
 				}
 				String name;
 				String profileUrl;
+				long uid;
 				try {
 					 name = response.getString("name");
 					 profileUrl = response.getString("profile_image_url");
+					uid = response.getLong("id");
 
 					SharedPreferences.Editor editor = getSharedPreferences("hi", MODE_PRIVATE).edit();
 					editor.putString("name", name);
 					editor.putString("profileUrl", profileUrl);
+					editor.putLong("uid", uid);
 					editor.commit();
 
 				} catch (JSONException e) {

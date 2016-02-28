@@ -1,6 +1,8 @@
 package com.codepath.apps.mptweettweet.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -37,14 +39,21 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
     @Bind(R.id.tabs)
     PagerSlidingTabStrip slidingTabStrip;
 
+    HomeTimelineListFragment mHomeTimelineListFragment;
+    MentionsTimelineFragment mMentionsTimelineFragment;
+
+    long mUid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
         ButterKnife.bind(this);
 
-        viewPager.setAdapter(new TweetsPagerAdapter(getSupportFragmentManager()));
 
+        mHomeTimelineListFragment = new HomeTimelineListFragment();
+        mMentionsTimelineFragment = new MentionsTimelineFragment();
+        viewPager.setAdapter(new TweetsPagerAdapter(getSupportFragmentManager(), mHomeTimelineListFragment, mMentionsTimelineFragment));
 
 
         slidingTabStrip.setViewPager(viewPager);
@@ -78,6 +87,12 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
 
     public void onProfileViewOnClick(MenuItem item) {
 Intent i = new Intent(this, ProfileActivity.class);
+
+        SharedPreferences prefs = getSharedPreferences("hi", Context.MODE_PRIVATE);
+        mUid = prefs.getLong("uid", 0);//"No name defined" is the default value.
+
+
+        i.putExtra("uid", mUid);
         startActivity(i);
     }
 
@@ -86,8 +101,14 @@ Intent i = new Intent(this, ProfileActivity.class);
     public class TweetsPagerAdapter extends FragmentPagerAdapter {
         private String[] pageTitles = {"Home", "Mentions"};
 
-        public TweetsPagerAdapter(FragmentManager fm) {
+        Fragment mFragment1;
+        Fragment mFragment2;
+
+        public TweetsPagerAdapter(FragmentManager fm, Fragment fragment1,  Fragment fragment2) {
             super(fm);
+
+            mFragment1 = fragment1;
+            mFragment2 = fragment2;
         }
 
         @Override
@@ -99,9 +120,9 @@ Intent i = new Intent(this, ProfileActivity.class);
         public Fragment getItem(int position) {
            switch (position) {
                case 0:
-                   return new HomeTimelineListFragment();
+                   return mFragment1;
                case 1:
-                   return new MentionsTimelineFragment();
+                   return mFragment2;
            }
             return null;
         }
@@ -119,12 +140,12 @@ Intent i = new Intent(this, ProfileActivity.class);
         twitterClient.postTweet(tweet, new JsonHttpResponseHandler() {
             public void onSuccess(int statusCode, Header[] headers, JSONObject jsonObject) {
                 Tweet newTweet = new Tweet(jsonObject);
-//                tweets.add(0, newTweet);
-//                adapter.notifyItemInserted(0);
-//                lvTweets.scrollToPosition(0);
+                mHomeTimelineListFragment.onNewTweet(newTweet);
+                mMentionsTimelineFragment.onNewTweet(newTweet);
             }
         });
     }
+
 
 
 

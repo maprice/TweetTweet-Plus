@@ -53,7 +53,6 @@ public class ProfileActivity extends AppCompatActivity {
 
 
 
-
       //  mScreenName = getIntent().getStringExtra("screenName");
 
         Long userId = getIntent().getLongExtra("uid", 0);
@@ -62,8 +61,14 @@ public class ProfileActivity extends AppCompatActivity {
                 .where("uid = ?", userId)
                 .executeSingle();
 
+
+
         String screenName = user.screenName;
-Log.e("asdfsdfasdfas", "passing in: " + screenName);
+
+        getSupportActionBar().setTitle(user.name);
+
+
+        Log.e("asdfsdfasdfas", "passing in: " + screenName);
         if (savedInstanceState == null) {
             UserTimelineFragment fragment = UserTimelineFragment.newInstance(screenName);
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -89,14 +94,13 @@ configureViewWithUser(user);
         Glide.with(this).load(user.profileImageUrl).placeholder(R.drawable.profile_photo_placeholder).into(ivProfileImage);
 
 
-
         ivBackground.setImageResource(0);
 
 
         Glide.with(this).load(user.backgroundImageUrl).into(ivBackground);
 
 
-        tvHandle.setText(user.screenName);
+        tvHandle.setText("@"+user.screenName);
 
 
          tvUsername.setText(user.name);

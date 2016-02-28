@@ -1,6 +1,8 @@
 package com.codepath.apps.mptweettweet.activities;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.text.Editable;
@@ -109,9 +111,12 @@ public class ComposeDialogFragment extends DialogFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        populateCurrentUser();
         if (getArguments() != null) {
-            mCurrentUserName = getArguments().getString(ARG_USER_NAME);
-            mCurrentUserUrl = getArguments().getString(ARG_USER_PROFILE);
+//            mCurrentUserName = getArguments().getString(ARG_USER_NAME);
+//            mCurrentUserUrl = getArguments().getString(ARG_USER_PROFILE);
             long uid = getArguments().getLong(ARG_USER_REPLY);
 
             if (uid > 0) {
@@ -191,4 +196,11 @@ public class ComposeDialogFragment extends DialogFragment {
         super.onDetach();
         mListener = null;
     }
+
+    private void populateCurrentUser() {
+        SharedPreferences prefs = getContext().getSharedPreferences("hi", Context.MODE_PRIVATE);
+        mCurrentUserName = prefs.getString("name", "No name defined");//"No name defined" is the default value.
+        mCurrentUserUrl = prefs.getString("profileUrl", "0"); //0 is the default value.
+    }
+
 }

@@ -1,8 +1,6 @@
 package com.codepath.apps.mptweettweet.fragments;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -39,10 +37,6 @@ public abstract class TweetListFragment extends Fragment implements TweetArrayAd
 
     @Bind(R.id.swipeContainer)
     SwipeRefreshLayout swipeContainer;
-
-    protected String currentUserName;
-    protected String currentUserUrl;
-
 
     protected ArrayList<Tweet> tweets;
     protected TweetArrayAdapter adapter;
@@ -111,11 +105,7 @@ public abstract class TweetListFragment extends Fragment implements TweetArrayAd
 
     }
 
-    private void populateCurrentUser() {
-        SharedPreferences prefs = getContext().getSharedPreferences("hi", Context.MODE_PRIVATE);
-        currentUserName = prefs.getString("name", "No name defined");//"No name defined" is the default value.
-        currentUserUrl = prefs.getString("profileUrl", "0"); //0 is the default value.
-    }
+
 
     @Override
     public void openDetailView(Tweet tweet) {
@@ -136,7 +126,7 @@ public abstract class TweetListFragment extends Fragment implements TweetArrayAd
     @Override
     public void reply(Tweet tweet) {
         FragmentManager fm = getActivity().getSupportFragmentManager();
-        ComposeDialogFragment editNameDialog = ComposeDialogFragment.newInstance(currentUserName, currentUserUrl, tweet.user.uid);
+        ComposeDialogFragment editNameDialog = ComposeDialogFragment.newInstance("sdf", "sdf", tweet.user.uid);
         editNameDialog.show(fm, "fragment_edit_name");
 
     }
@@ -157,5 +147,11 @@ public abstract class TweetListFragment extends Fragment implements TweetArrayAd
         i.putExtra("uid", user.uid);
 
         startActivity(i);
+    }
+
+   public void onNewTweet(Tweet tweet) {
+       tweets.add(0, tweet);
+                adapter.notifyItemInserted(0);
+                lvTweets.scrollToPosition(0);
     }
 }
