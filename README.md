@@ -52,10 +52,10 @@ Includes all bonus, optional features included in https://github.com/maprice/Twe
 ## Video Walkthrough 
 
 ### Basic user flow
-![Alt text](/images/opening.gif)
+![Alt text](/images/opening1.gif)
 
 ### Composing Tweet
-![Alt text](/images/opening2.gif)
+![Alt text](/images/retweet.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 

@@ -1,9 +1,10 @@
 package com.codepath.apps.mptweettweet.fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 
+import com.activeandroid.query.Select;
 import com.codepath.apps.mptweettweet.models.Tweet;
+import com.codepath.apps.mptweettweet.utils.NetworkUtils;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.apache.http.Header;
@@ -11,6 +12,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by mprice on 2/27/16.
@@ -24,8 +26,6 @@ public class UserTimelineFragment extends TweetListFragment {
         Bundle args = new Bundle();
         args.putString("screenName", screenName);
 
-
-        Log.e("nameasdfa", "Storing=" + screenName);
         fragmentDemo.setArguments(args);
         return fragmentDemo;
     }
@@ -47,33 +47,30 @@ public class UserTimelineFragment extends TweetListFragment {
             }
         }
 
-//        if (!NetworkUtils.isNetworkAvailable(getActivity())) {
-//            //NetworkUtils.showNetworkError(getApplicationContext());
-//
-//            if (refresh) {
-//                List<Tweet> queryResults = new Select().from(Tweet.class)
-//                        .limit(100).execute();
-//                tweets.addAll(queryResults);
-//
-//                int curSize = adapter.getItemCount();
-//                adapter.notifyItemRangeInserted(curSize, queryResults.size() - 1);
-//            }
-//
-//            swipeContainer.setRefreshing(false);
-//            return;
-//        }
-        Log.e("Timeline!!!","sdfsdfsdf");
+        if (!NetworkUtils.isNetworkAvailable(getActivity())) {
+            NetworkUtils.showNetworkError(getActivity());
+
+            if (refresh) {
+                List<Tweet> queryResults = new Select().from(Tweet.class)
+                        .limit(100).execute();
+                tweets.addAll(queryResults);
+
+                int curSize = adapter.getItemCount();
+                adapter.notifyItemRangeInserted(curSize, queryResults.size() - 1);
+            }
+
+            swipeContainer.setRefreshing(false);
+            return;
+        }
 
         twitterClient.getUserTimeline(mScreenName, new JsonHttpResponseHandler() {
             public void onSuccess(int statusCode, Header[] headers, JSONArray jsonArray) {
                 ArrayList<Tweet> list = Tweet.fromJson(jsonArray);
                 tweets.addAll(list);
-                Log.e("Timeline!!!", jsonArray.toString());
+
                 int curSize = adapter.getItemCount();
                 adapter.notifyItemRangeInserted(curSize, list.size() - 1);
-
                 swipeContainer.setRefreshing(false);
-
             }
 
             @Override

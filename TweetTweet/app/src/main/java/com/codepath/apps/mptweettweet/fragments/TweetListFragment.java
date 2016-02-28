@@ -50,9 +50,7 @@ public abstract class TweetListFragment extends Fragment implements TweetArrayAd
         super.onCreate(savedInstanceState);
 
         tweets = new ArrayList<>();
-
         adapter = new TweetArrayAdapter(tweets, this);
-
         twitterClient = RestApplication.getRestClient();
     }
 
@@ -89,8 +87,6 @@ public abstract class TweetListFragment extends Fragment implements TweetArrayAd
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
 
-
-
         return v;
     }
 
@@ -104,8 +100,6 @@ public abstract class TweetListFragment extends Fragment implements TweetArrayAd
         lvTweets.setAdapter(alphaAdapter);
 
     }
-
-
 
     @Override
     public void openDetailView(Tweet tweet) {
@@ -126,9 +120,8 @@ public abstract class TweetListFragment extends Fragment implements TweetArrayAd
     @Override
     public void reply(Tweet tweet) {
         FragmentManager fm = getActivity().getSupportFragmentManager();
-        ComposeDialogFragment editNameDialog = ComposeDialogFragment.newInstance("sdf", "sdf", tweet.user.uid);
+        ComposeDialogFragment editNameDialog = ComposeDialogFragment.newInstance(tweet.user.uid);
         editNameDialog.show(fm, "fragment_edit_name");
-
     }
 
     @Override

@@ -91,12 +91,10 @@ public class ComposeDialogFragment extends DialogFragment {
         return fragment;
     }
 
-    public static ComposeDialogFragment newInstance(String currentUserName, String currentUserUrl, Long uid) {
+    public static ComposeDialogFragment newInstance(Long uid) {
         ComposeDialogFragment fragment = new ComposeDialogFragment();
         Bundle args = new Bundle();
 
-        args.putString(ARG_USER_NAME, currentUserName);
-        args.putString(ARG_USER_PROFILE, currentUserUrl);
         args.putLong(ARG_USER_REPLY, uid);
         fragment.setArguments(args);
 
@@ -112,11 +110,8 @@ public class ComposeDialogFragment extends DialogFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         populateCurrentUser();
         if (getArguments() != null) {
-//            mCurrentUserName = getArguments().getString(ARG_USER_NAME);
-//            mCurrentUserUrl = getArguments().getString(ARG_USER_PROFILE);
             long uid = getArguments().getLong(ARG_USER_REPLY);
 
             if (uid > 0) {
@@ -124,8 +119,6 @@ public class ComposeDialogFragment extends DialogFragment {
                         .where("uid = ?", uid)
                         .executeSingle();
             }
-
-
         }
     }
 
@@ -202,5 +195,4 @@ public class ComposeDialogFragment extends DialogFragment {
         mCurrentUserName = prefs.getString("name", "No name defined");//"No name defined" is the default value.
         mCurrentUserUrl = prefs.getString("profileUrl", "0"); //0 is the default value.
     }
-
 }

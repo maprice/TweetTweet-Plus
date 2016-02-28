@@ -32,7 +32,6 @@ public class Tweet extends Model {
     public int favoriteCount;
     @Column(name = "imageUrl")
     public String imageUrl;
-
     @Column(name = "retweeted")
     public boolean retweeted;
     @Column(name = "favorited")
@@ -40,7 +39,6 @@ public class Tweet extends Model {
 
     public Tweet() {
     }
-
 
     public Tweet(JSONObject object) {
         super();
@@ -57,7 +55,6 @@ public class Tweet extends Model {
 
             this.retweeted = object.getBoolean("retweeted");
             this.favorited = object.getBoolean("favorited");
-
 
             JSONObject entities = object.optJSONObject("entities");
             if (entities != null) {

@@ -50,11 +50,9 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
         setContentView(R.layout.activity_timeline);
         ButterKnife.bind(this);
 
-
         mHomeTimelineListFragment = new HomeTimelineListFragment();
         mMentionsTimelineFragment = new MentionsTimelineFragment();
         viewPager.setAdapter(new TweetsPagerAdapter(getSupportFragmentManager(), mHomeTimelineListFragment, mMentionsTimelineFragment));
-
 
         slidingTabStrip.setViewPager(viewPager);
 
@@ -76,7 +74,6 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
 
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -84,18 +81,15 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
         return true;
     }
 
-
     public void onProfileViewOnClick(MenuItem item) {
-Intent i = new Intent(this, ProfileActivity.class);
+        Intent i = new Intent(this, ProfileActivity.class);
 
         SharedPreferences prefs = getSharedPreferences("hi", Context.MODE_PRIVATE);
         mUid = prefs.getLong("uid", 0);//"No name defined" is the default value.
 
-
         i.putExtra("uid", mUid);
         startActivity(i);
     }
-
 
 
     public class TweetsPagerAdapter extends FragmentPagerAdapter {
@@ -104,7 +98,7 @@ Intent i = new Intent(this, ProfileActivity.class);
         Fragment mFragment1;
         Fragment mFragment2;
 
-        public TweetsPagerAdapter(FragmentManager fm, Fragment fragment1,  Fragment fragment2) {
+        public TweetsPagerAdapter(FragmentManager fm, Fragment fragment1, Fragment fragment2) {
             super(fm);
 
             mFragment1 = fragment1;
@@ -118,12 +112,12 @@ Intent i = new Intent(this, ProfileActivity.class);
 
         @Override
         public Fragment getItem(int position) {
-           switch (position) {
-               case 0:
-                   return mFragment1;
-               case 1:
-                   return mFragment2;
-           }
+            switch (position) {
+                case 0:
+                    return mFragment1;
+                case 1:
+                    return mFragment2;
+            }
             return null;
         }
 
@@ -145,8 +139,4 @@ Intent i = new Intent(this, ProfileActivity.class);
             }
         });
     }
-
-
-
-
 }

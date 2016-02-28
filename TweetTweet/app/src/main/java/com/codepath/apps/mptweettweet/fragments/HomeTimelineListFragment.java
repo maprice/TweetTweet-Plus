@@ -38,7 +38,7 @@ public class HomeTimelineListFragment extends TweetListFragment  {
         }
 
         if (!NetworkUtils.isNetworkAvailable(getActivity())) {
-            //NetworkUtils.showNetworkError(getApplicationContext());
+            NetworkUtils.showNetworkError(getActivity());
 
             if (refresh) {
                 List<Tweet> queryResults = new Select().from(Tweet.class)

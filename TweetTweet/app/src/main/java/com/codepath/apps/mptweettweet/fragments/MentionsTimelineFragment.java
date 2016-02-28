@@ -37,7 +37,7 @@ public class MentionsTimelineFragment extends TweetListFragment{
         }
 
         if (!NetworkUtils.isNetworkAvailable(getActivity())) {
-            //NetworkUtils.showNetworkError(getApplicationContext());
+            NetworkUtils.showNetworkError(getActivity());
 
             if (refresh) {
                 List<Tweet> queryResults = new Select().from(Tweet.class)
@@ -57,12 +57,10 @@ public class MentionsTimelineFragment extends TweetListFragment{
             public void onSuccess(int statusCode, Header[] headers, JSONArray jsonArray) {
                 ArrayList<Tweet> list = Tweet.fromJson(jsonArray);
                 tweets.addAll(list);
-                Log.e("Mentions", jsonArray.toString());
                 int curSize = adapter.getItemCount();
                 adapter.notifyItemRangeInserted(curSize, list.size() - 1);
 
                 swipeContainer.setRefreshing(false);
-
             }
 
             @Override
