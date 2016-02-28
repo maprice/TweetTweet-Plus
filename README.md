@@ -50,12 +50,7 @@ Includes all bonus, optional features included in https://github.com/maprice/Twe
 - [x] Makes use of shared preferences to store application wide username and profileURL data
 
 ## Video Walkthrough 
-
-### Basic user flow
-![Alt text](/images/opening1.gif)
-
-### Composing Tweet
-![Alt text](/images/retweet.gif)
+![Alt text](/images/winner.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 

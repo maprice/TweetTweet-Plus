@@ -22,7 +22,7 @@ public class User extends Model {
 
     @Column(name = "screenName")
     public String screenName;
-    
+
     @Column(name = "profile_background_image_url")
     public String backgroundImageUrl;
 
